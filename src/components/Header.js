@@ -59,7 +59,7 @@ const Header = (props) => {
             ></Button>
             <Button
               text="회원가입"
-              onClick={() => {
+              _onClick={() => {
                 history.push("/signup");
               }}
             ></Button>
