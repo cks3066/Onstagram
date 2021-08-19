@@ -20,7 +20,7 @@ const Button = (props) => {
 };
 
 Button.defaultProps = {
-  text: "텍스트",
+  text: false,
   children: null,
   _onClick: () => {},
   is_float: false,
