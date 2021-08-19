@@ -2,19 +2,24 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-  const { text, _onClick, is_float, children } = props;
+  const { text, _onClick, is_float, children, margin, width } = props;
 
   if (is_float) {
     return (
       <React.Fragment>
-        <FloatButton onClick={_onClick}>{text? text: children}</FloatButton>
+        <FloatButton onClick={_onClick}>{text ? text : children}</FloatButton>
       </React.Fragment>
     );
   }
 
+  const styles = {
+    margin: margin,
+    width: width,
+  }
+
   return (
     <React.Fragment>
-      <ElButton onClick={_onClick}>{text? text: children}</ElButton>
+      <ElButton {...styles} onClick={_onClick}>{text ? text : children}</ElButton>
     </React.Fragment>
   );
 };
@@ -24,15 +29,18 @@ Button.defaultProps = {
   children: null,
   _onClick: () => {},
   is_float: false,
+  margin: false,
+  width: '100%',
 };
 
 const ElButton = styled.button`
-  width: 100%;
+  width: ${(props) => props.width};
   background-color: #817f7f;
   color: #ffffff;
   padding: 12px 0px;
   box-sizing: border-box;
   border: none;
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
 `;
 
 const FloatButton = styled.button`
@@ -47,7 +55,7 @@ const FloatButton = styled.button`
   bottom: 50px;
   right: 16px;
   text-align: center;
-  border:none;
+  border: none;
   border-radius: 50px;
   align-items: center;
   justify-content: center;
