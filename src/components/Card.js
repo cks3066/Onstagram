@@ -20,4 +20,10 @@ const Card = (props) => {
   );
 };
 
+Card.defaultProps = {
+    image_url: "",
+    user_name: "",
+    post_id: null,
+}
+
 export default Card;
