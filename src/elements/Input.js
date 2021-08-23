@@ -4,39 +4,64 @@ import styled from "styled-components";
 import { Text, Grid } from "./index";
 
 const Input = (props) => {
-  const { value, label, placeholder, _onChange, type, multiline } = props;
+  const {
+    label,
+    placeholder,
+    _onChange,
+    type,
+    multiLine,
+    value,
+    is_submit,
+    onSubmit,
+  } = props;
 
-  if (multiline) {
+  if (multiLine) {
     return (
       <Grid>
         {label && <Text margin="0px">{label}</Text>}
         <ElTextarea
           rows={10}
+          value={value}
           placeholder={placeholder}
           onChange={_onChange}
-          value={value}
-        />
+        ></ElTextarea>
       </Grid>
     );
-  } else {
-    return (
-      <React.Fragment>
-        <Grid>
-          {label && <Text margin="0px">{label}</Text>}
-          <ElInput type={type} placeholder={placeholder} onChange={_onChange} />
-        </Grid>
-      </React.Fragment>
-    );
   }
+
+  return (
+    <React.Fragment>
+      <Grid>
+        {label && <Text margin="0px">{label}</Text>}
+        {is_submit ? (
+          <ElInput
+            type={type}
+            placeholder={placeholder}
+            onChange={_onChange}
+            value={value}
+            onKeyPress={(e) => {
+              if(e.key === "Enter"){
+                onSubmit(e);
+              }
+            }}
+          />
+        ) : (
+          <ElInput type={type} placeholder={placeholder} onChange={_onChange} />
+        )}
+      </Grid>
+    </React.Fragment>
+  );
 };
 
 Input.defaultProps = {
-  multiline: false,
+  multiLine: false,
   label: false,
   placeholder: "텍스트를 입력해주세요.",
   type: "text",
-  _onChange: () => {},
   value: "",
+  is_submit: false,
+  onSubmit: () => {},
+  _onChange: () => {},
 };
 
 const ElTextarea = styled.textarea`
