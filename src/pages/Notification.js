@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Text, Image } from "../elements";
 import Card from "../components/Card";
 
-import { realtime } from "../shared/firebase";
+import { realtime } from "../shared/Firebase";
 import { useSelector } from "react-redux";
 
 const Notification = (props) => {

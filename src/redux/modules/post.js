@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { firestore, storage } from "../../shared/firebase";
+import { firestore, storage } from "../../shared/Firebase";
 import "moment";
 import moment from "moment";
 

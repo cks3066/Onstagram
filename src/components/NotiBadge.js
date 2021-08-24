@@ -2,7 +2,7 @@ import React from "react";
 import { Badge } from "@material-ui/core";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
-import { realtime } from "../shared/firebase";
+import { realtime } from "../shared/Firebase";
 import { useSelector } from "react-redux";
 
 const NotiBadge = (props) => {

@@ -3,7 +3,7 @@ import { produce } from "immer";
 
 import { setCookie, getCookie, deleteCookie } from "../../shared/Cookie";
 
-import { auth } from "../../shared/firebase";
+import { auth } from "../../shared/Firebase";
 import firebase from "firebase/app";
 
 // actions
