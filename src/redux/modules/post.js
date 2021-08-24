@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { firestore, storage } from "../../shared/Firebase";
+import { firestore, storage } from "../../shared/firebase";
 import "moment";
 import moment from "moment";
 
@@ -11,16 +11,12 @@ const ADD_POST = "ADD_POST";
 const EDIT_POST = "EDIT_POST";
 const LOADING = "LOADING";
 
-const setPost = createAction(SET_POST, (post_list, paging) => ({
-  post_list,
-  paging,
-}));
+const setPost = createAction(SET_POST, (post_list, paging) => ({ post_list, paging }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
 const editPost = createAction(EDIT_POST, (post_id, post) => ({
   post_id,
   post,
 }));
-
 const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 
 const initialState = {
@@ -49,8 +45,11 @@ const editPostFB = (post_id = null, post = {}) => {
     }
 
     const _image = getState().image.preview;
+
     const _post_idx = getState().post.list.findIndex((p) => p.id === post_id);
     const _post = getState().post.list[_post_idx];
+
+    console.log(_post);
 
     const postDB = firestore.collection("post");
 
@@ -62,6 +61,7 @@ const editPostFB = (post_id = null, post = {}) => {
           dispatch(editPost(post_id, { ...post }));
           history.replace("/");
         });
+
       return;
     } else {
       const user_id = getState().user.user.uid;
@@ -155,9 +155,10 @@ const addPostFB = (contents = "") => {
 
 const getPostFB = (start = null, size = 3) => {
   return function (dispatch, getState, { history }) {
+
     let _paging = getState().post.paging;
 
-    if (_paging.start && !_paging.next) {
+    if(_paging.start && !_paging.next){
       return;
     }
 
@@ -166,9 +167,10 @@ const getPostFB = (start = null, size = 3) => {
 
     let query = postDB.orderBy("insert_dt", "desc");
 
-    if (start) {
+    if(start){
       query = query.startAt(start);
     }
+
 
     query
       .limit(size + 1)
@@ -178,12 +180,9 @@ const getPostFB = (start = null, size = 3) => {
 
         let paging = {
           start: docs.docs[0],
-          next:
-            docs.docs.length === size + 1
-              ? docs.docs[docs.docs.length - 1]
-              : null,
+          next: docs.docs.length === size+1? docs.docs[docs.docs.length -1] : null,
           size: size,
-        };
+        }
 
         docs.forEach((doc) => {
           let _post = doc.data();
@@ -207,24 +206,24 @@ const getPostFB = (start = null, size = 3) => {
 
         post_list.pop();
 
+        console.log(post_list);
+
         dispatch(setPost(post_list, paging));
       });
   };
 };
 
 const getOnePostFB = (id) => {
-  return function (dispatch, getState, { history }) {
+  return function(dispatch, getState, {history}){
     const postDB = firestore.collection("post");
     postDB
       .doc(id)
       .get()
       .then((doc) => {
+        console.log(doc);
+        console.log(doc.data());
+
         let _post = doc.data();
-
-        if (!_post) {
-          return;
-        }
-
         let post = Object.keys(_post).reduce(
           (acc, cur) => {
             if (cur.indexOf("user_") !== -1) {
@@ -238,10 +237,10 @@ const getOnePostFB = (id) => {
           { id: doc.id, user_info: {} }
         );
 
-        dispatch(setPost([post], { start: null, next: null, size: 3 }));
+        dispatch(setPost([post]));
       });
-  };
-};
+  }
+}
 
 export default handleActions(
   {
@@ -249,22 +248,20 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list.push(...action.payload.post_list);
 
-        // post_id가 같은 중복 항목을 제거합시다! :)
         draft.list = draft.list.reduce((acc, cur) => {
-          // findIndex로 누산값(cur)에 현재값이 이미 들어있나 확인해요!
-          // 있으면? 덮어쓰고, 없으면? 넣어주기!
-          if (acc.findIndex((a) => a.id === cur.id) === -1) {
+          if(acc.findIndex(a => a.id === cur.id) === -1){
             return [...acc, cur];
-          } else {
+          }else{
             acc[acc.findIndex((a) => a.id === cur.id)] = cur;
             return acc;
           }
         }, []);
 
-        // paging이 있을 때만 넣기
-        if (action.payload.paging) {
+
+        if(action.payload.paging){
           draft.paging = action.payload.paging;
         }
+        
         draft.is_loading = false;
       }),
 
@@ -278,10 +275,9 @@ export default handleActions(
 
         draft.list[idx] = { ...draft.list[idx], ...action.payload.post };
       }),
-    [LOADING]: (state, action) =>
-      produce(state, (draft) => {
+      [LOADING]: (state, action) => produce(state, (draft) => {
         draft.is_loading = action.payload.is_loading;
-      }),
+      })
   },
   initialState
 );

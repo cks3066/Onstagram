@@ -19,7 +19,7 @@ import Permit from "./Permit";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 
-import { apiKey } from "./Firebase";
+import { apiKey } from "./firebase";
 import Notification from "../pages/Notification";
 
 function App() {

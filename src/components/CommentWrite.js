@@ -1,32 +1,22 @@
-//components/CommentWrite.js
 import React from "react";
-
 import { Grid, Input, Button } from "../elements";
 
-import { useDispatch } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
+import { useDispatch} from "react-redux";
 
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
+  const [comment_text, setCommentText] = React.useState();
 
-  const { post_id } = props;
+  const {post_id} = props;
 
-  const [comment_text, setCommentText] = React.useState("");
-  
   const onChange = (e) => {
     setCommentText(e.target.value);
   };
 
   const write = () => {
-    if (comment_text === "") {
-      window.alert("댓글을 입력해주세요!");
-      return;
-    }
-    // 입력된 텍스트는 지우기!
-    setCommentText("");
-
-    // 파이어스토어에 추가합니다.
     dispatch(commentActions.addCommentFB(post_id, comment_text));
+    setCommentText("");
   };
 
   return (
@@ -45,10 +35,6 @@ const CommentWrite = (props) => {
       </Grid>
     </React.Fragment>
   );
-};
-
-CommentWrite.defaultProps = {
-  post_id: "",
 };
 
 export default CommentWrite;

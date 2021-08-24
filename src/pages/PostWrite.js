@@ -23,6 +23,7 @@ const PostWrite = (props) => {
 
   React.useEffect(() => {
     if (is_edit && !_post) {
+      console.log("포스트 정보가 없어요!");
       history.goBack();
 
       return;
@@ -42,8 +43,8 @@ const PostWrite = (props) => {
   };
 
   const editPost = () => {
-    dispatch(postActions.editPostFB(post_id, { contents: contents }));
-  };
+    dispatch(postActions.editPostFB(post_id, {contents: contents}));
+  }
 
   if (!is_login) {
     return (
@@ -91,7 +92,7 @@ const PostWrite = (props) => {
           _onChange={changeContents}
           label="게시글 내용"
           placeholder="게시글 작성"
-          multiline
+          multiLine
         />
       </Grid>
 

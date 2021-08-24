@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from 'react-redux';
 import user from "../redux/modules/user";
-import { apiKey } from './Firebase';
+import { apiKey } from './firebase';
 
 const Permit = (props) => {
     const is_login = useSelector(state => state.user.user);
