@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 
 import { history } from "../redux/configureStore";
-import { apiKey } from "../shared/Firebase";
+import { apiKey } from "../shared/firebase";
 
 import NotiBadge from "./NotiBadge";
 

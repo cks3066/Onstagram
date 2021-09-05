@@ -1,6 +1,6 @@
 import {createAction, handleActions} from "redux-actions";
 import produce from "immer";
-import {storage} from "../../shared/Firebase";
+import {storage} from "../../shared/firebase";
 
 const UPLOADING = "UPLOADING";
 const UPLOAD_IMAGE = "UPLOAD_IMAGE";
