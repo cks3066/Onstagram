@@ -40,6 +40,7 @@ function App() {
         <Header></Header>
         <ConnectedRouter history={history}>
           <Route path="/" exact component={PostList} />
+          <Route path="/Onstagram" exact component={PostList} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/write" exact component={PostWrite} />
