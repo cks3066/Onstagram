@@ -24,6 +24,7 @@ const PostDetail = (props) => {
     if (post) {
       return;
     }
+
     dispatch(postActions.getOnePostFB(id));
   }, []);
 
