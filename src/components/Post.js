@@ -1,9 +1,9 @@
 import React from "react";
 import { Grid, Image, Text, Button } from "../elements";
 
-import {history} from "../redux/configureStore";
+import { history } from "../redux/configureStore";
 
- const Post = (props) => {
+const Post = React.memo((props) => {
   return (
     <React.Fragment>
       <Grid>
@@ -15,9 +15,14 @@ import {history} from "../redux/configureStore";
           <Grid is_flex width="auto">
             <Text>{props.insert_dt}</Text>
             {props.is_me && (
-              <Button width="auto" margin="4px" padding="4px" _onClick={() => {
-                history.push(`/write/${props.id}`);
-              }}>
+              <Button
+                width="auto"
+                margin="4px"
+                padding="4px"
+                _onClick={() => {
+                  history.push(`/write/${props.id}`);
+                }}
+              >
                 수정
               </Button>
             )}
@@ -37,7 +42,7 @@ import {history} from "../redux/configureStore";
       </Grid>
     </React.Fragment>
   );
-};
+});
 
 Post.defaultProps = {
   user_info: {
