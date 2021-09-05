@@ -4,7 +4,7 @@ import { getCookie, setCookie, deleteCookie } from "../shared/Cookie";
 
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { emailCheck } from "../shared/common";
+import { emailCheck } from './../shared/common';
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Login = (props) => {
       return;
     }
 
-    if(!emailCheck(id)){
+    if(!emailCheck(id)) {
       window.alert("이메일 형식이 맞지 않습니다!");
       return;
     }
@@ -54,9 +54,6 @@ const Login = (props) => {
             _onChange={(e) => {
               setPwd(e.target.value);
             }}
-            value={pwd}
-            is_submit
-            onSubmit={login}
           />
         </Grid>
 

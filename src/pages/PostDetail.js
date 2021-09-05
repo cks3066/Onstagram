@@ -5,7 +5,7 @@ import CommentWrite from "../components/CommentWrite";
 
 import Permit from "../shared/Permit";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { actionCreators as postActions } from "../redux/modules/post";
 

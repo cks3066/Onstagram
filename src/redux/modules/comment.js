@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { firestore, realtime } from "../../shared/firebase";
+import { firestore } from "../../shared/Firebase";
 import "moment";
 import moment from "moment";
 
@@ -50,12 +50,11 @@ const addCommentFB = (post_id, contents) => {
 
       const increment = firebase.firestore.FieldValue.increment(1);
 
-      comment = {...comment, id: doc.id};
+      comment = { ...comment, id: doc.id };
       postDB
         .doc(post_id)
         .update({ comment_cnt: increment })
         .then((_post) => {
-          
           dispatch(addComment(post_id, comment));
 
           if (post) {
@@ -64,24 +63,6 @@ const addCommentFB = (post_id, contents) => {
                 comment_cnt: parseInt(post.comment_cnt) + 1,
               })
             );
-
-            const _noti_item = realtime.ref(`noti/${post.user_info.user_id}/list`).push();
-
-            _noti_item.set({
-              post_id: post.id,
-              user_name: comment.user_name,
-              image_url: post.image_url,
-              insert_dt: comment.insert_dt
-            }, (err) => {
-              if(err){
-                console.log("알림 저장에 실패했어요! 8ㅛ8");
-              }else{
-                const notiDB = realtime.ref(`noti/${post.user_info.user_id}`);
-
-                notiDB.update({read: false});
-              }
-            });
-
           }
         });
     });
@@ -102,28 +83,29 @@ const getCommentFB = (post_id = null) => {
       .get()
       .then((docs) => {
         let list = [];
-
         docs.forEach((doc) => {
           list.push({ ...doc.data(), id: doc.id });
         });
-
+        //   가져온 데이터를 넣어주자!
         dispatch(setComment(post_id, list));
       })
       .catch((err) => {
-        console.log("댓글 정보를 가져올 수가 없네요!", err);
+        console.log("댓글 가져오기 실패!", post_id, err);
       });
   };
 };
-
 export default handleActions(
   {
     [SET_COMMENT]: (state, action) =>
       produce(state, (draft) => {
+        // comment는 딕셔너리 구조로 만들어서,
+        // post_id로 나눠 보관합시다! (각각 게시글 방을 만들어준다고 생각하면 구조 이해가 쉬워요.)
         draft.list[action.payload.post_id] = action.payload.comment_list;
       }),
-    [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-      draft.list[action.payload.post_id].unshift(action.payload.comment);
-    }),
+    [ADD_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list[action.payload.post_id].unshift(action.payload.comment);
+      }),
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
         draft.is_loading = action.payload.is_loading;
