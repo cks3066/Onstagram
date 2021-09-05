@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Onstagram/static/css/main.2df57a8d.chunk.css",
+    "main.js": "/Onstagram/static/js/main.eb4c3a5f.chunk.js",
+    "main.js.map": "/Onstagram/static/js/main.eb4c3a5f.chunk.js.map",
+    "runtime-main.js": "/Onstagram/static/js/runtime-main.a7da815e.js",
+    "runtime-main.js.map": "/Onstagram/static/js/runtime-main.a7da815e.js.map",
+    "static/js/2.4e7e53a7.chunk.js": "/Onstagram/static/js/2.4e7e53a7.chunk.js",
+    "static/js/2.4e7e53a7.chunk.js.map": "/Onstagram/static/js/2.4e7e53a7.chunk.js.map",
+    "static/js/3.b3c7cb8c.chunk.js": "/Onstagram/static/js/3.b3c7cb8c.chunk.js",
+    "static/js/3.b3c7cb8c.chunk.js.map": "/Onstagram/static/js/3.b3c7cb8c.chunk.js.map",
+    "index.html": "/Onstagram/index.html",
+    "static/css/main.2df57a8d.chunk.css.map": "/Onstagram/static/css/main.2df57a8d.chunk.css.map",
+    "static/js/2.4e7e53a7.chunk.js.LICENSE.txt": "/Onstagram/static/js/2.4e7e53a7.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a7da815e.js",
+    "static/js/2.4e7e53a7.chunk.js",
+    "static/css/main.2df57a8d.chunk.css",
+    "static/js/main.eb4c3a5f.chunk.js"
+  ]
+}
