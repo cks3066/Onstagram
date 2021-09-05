@@ -3,7 +3,6 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
 import "firebase/database";
-import "firebase/analytics";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAY6yGELmDWlv5Yn-5xlAfHA_wJ25AW5w0",
@@ -22,6 +21,5 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 const storage = firebase.storage();
 const realtime = firebase.database();
-const analytics = firebase.analytics();
 
-export{auth, apiKey, firestore, storage, realtime, analytics};
+export{auth, apiKey, firestore, storage, realtime};
