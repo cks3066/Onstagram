@@ -6,4 +6,4 @@
 
 - 무한 드래그
 
-https://cks3066.github.io/Onstagram/
+
