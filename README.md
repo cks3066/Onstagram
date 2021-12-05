@@ -1,6 +1,6 @@
 # 리액트, Firebase 를 이용한 SNS 구현하기
 
-# 기능
+## 기능
 - styled-components 기반 UI 구성
 - Redux 기반 상태관리
 - Firebase Auth 기반 로그인, 회원가입
